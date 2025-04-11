@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Espace - Stade Toulousain</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap");
+
+    body {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      background: #000;
+      background-image: url("lune-mars.png");
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #f0f0f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .countdown {
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 8px;
+      padding: 10px 20px;
+      width: auto;
+      text-align: center;
+      margin: 20px auto;
+    }
+
+    .title {
+      font-size: 1em;
+      color: #e3e935;
+      margin-bottom: 4px;
+    }
+
+    .timer {
+      font-size: 1em;
+      font-weight: bold;
+    }
+
+    /* Responsive mobile (max-width 600px) */
+    @media (max-width: 600px) {
+      .countdown {
+        width: 90%;
+      }
+      .timer, .title {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="countdown">
+    <div class="title">Mission Lune</div>
+    <div class="timer" id="moonCountdown">Chargement...</div>
+  </div>
+
+  <div class="countdown">
+    <div class="title">Mission Mars</div>
+    <div class="timer" id="marsCountdown">Chargement...</div>
+  </div>
+
+  <script>
+    function updateCountdown(id, targetDate) {
+      const timerEl = document.getElementById(id);
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        timerEl.innerText = "Mission terminée ! ✨";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      timerEl.textContent = `${days}j ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    const moonDate = new Date("January 1, 2030 00:00:00").getTime();
+    const marsDate = new Date("January 1, 2040 00:00:00").getTime();
+
+    function refreshTimers() {
+      updateCountdown("moonCountdown", moonDate);
+      updateCountdown("marsCountdown", marsDate);
+    }
+
+    setInterval(refreshTimers, 1000);
+    refreshTimers();
+  </script>
+
+</body>
+</html>
