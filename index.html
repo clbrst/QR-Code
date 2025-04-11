@@ -7,30 +7,41 @@
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap");
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: "Orbitron", sans-serif;
       background: #000;
       background-image: url("lune-mars.png");
       background-size: cover;
-      background-position: center center;
+      background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
       color: #f0f0f0;
       height: 100vh;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      position: relative;
     }
 
     .countdown {
-      background: rgba(0, 0, 0, 0.35);
+ 
       border-radius: 8px;
       padding: 10px 20px;
-      width: auto;
       text-align: center;
-      margin: 20px auto;
+      position: absolute;
+      transform: translateX(-50%);
+    }
+
+    .moon {
+      top: 30%;
+      left: 25%;
+    }
+
+    .mars {
+      top: 30%;
+      left: 75%;
     }
 
     .title {
@@ -44,25 +55,25 @@
       font-weight: bold;
     }
 
-    /* Responsive mobile (max-width 600px) */
+    /* Responsive mobile */
     @media (max-width: 600px) {
       .countdown {
-        width: 90%;
+        padding: 8px 12px;
       }
-      .timer, .title {
-        font-size: 1.1em;
+      .title, .timer {
+        font-size: 1em;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="countdown">
+  <div class="countdown moon">
     <div class="title">Mission Lune</div>
     <div class="timer" id="moonCountdown">Chargement...</div>
   </div>
 
-  <div class="countdown">
+  <div class="countdown mars">
     <div class="title">Mission Mars</div>
     <div class="timer" id="marsCountdown">Chargement...</div>
   </div>
